@@ -1,5 +1,5 @@
 # Word2Vec-Keras Text Classifier
-Word2Vec-Keras is a simple Word2Vec and LSTM wrapper for the deep learning library to help train neural networks for text classification.
+Word2Vec-Keras is a simple Word2Vec and LSTM wrapper for text classification.
 
 # How it works
 
