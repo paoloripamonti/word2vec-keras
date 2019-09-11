@@ -1,8 +1,8 @@
 # Word2Vec-Keras Text Classifier
 Word2Vec-Keras is a simple Word2Vec and LSTM wrapper for text classification.
 
-It combines Gensim Word2Vec model with Keras neural network trhough an Emnedding layer as input.
-The Neural Network works with LSTM layer
+It combines Gensim Word2Vec model with Keras neural network trhough an Embedding layer as input.
+The Neural Network contains with LSTM layer
 
 ## How install
 ```git
@@ -19,7 +19,8 @@ model = Word2VecKeras()
 model.train(x_train, y_train)
 ```
 
-Train Word2Vec and Keras models
+Train Word2Vec and Keras models.
+The Keras model has _EralyStopping_ callback for stopping training after 6 epochs that not improve accuracy.
 
 Train parameters:
 - **x_train**: list of raw sentences, no text cleaning will be perfomed
@@ -116,3 +117,5 @@ pprint(model.evaluate(x_test, y_test))
 model.save('./model.tar.gz')
 
 ```
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1--KCXDEXQHg-ueAwnyRrRmFbcqwvLhcZ)
