@@ -81,7 +81,7 @@ class Word2VecKeras(object):
         self.k_hidden_layer_neurons = k_hidden_layer_neurons
 
         # split text in tokens
-        x_train = [text.split() for text in x_train]
+        x_train = [gensim.utils.simple_preprocess(text) for text in x_train]
 
         logging.info("Build & train Word2Vec model")
         self.w2v_model = gensim.models.Word2Vec(min_count=self.w2v_min_count, window=self.w2v_window,
@@ -166,8 +166,9 @@ class Word2VecKeras(object):
         if not self.k_model or not self.w2v_model:
             raise RuntimeError("Model not in memory, please load it train new model")
         start_at = time.time()
-        x_test = keras.preprocessing.sequence.pad_sequences(self.tokenizer.texts_to_sequences([text]),
-                                                            maxlen=self.k_max_sequence_len)
+        x_test = keras.preprocessing.sequence.pad_sequences(
+            self.tokenizer.texts_to_sequences(gensim.utils.simple_preprocess(text)),
+            maxlen=self.k_max_sequence_len)
         # Predict
         confidences = self.k_model.predict(x_test)[0]
         # Get mex prediction

@@ -25,4 +25,4 @@ model.train(x_train, y_train, w2v_epochs=20, k_epochs=1)
 
 pprint(model.evaluate(x_test, y_test))
 
-model.save()
+model.save("model.tar.gz")
