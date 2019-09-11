@@ -144,7 +144,7 @@ class Word2VecKeras(object):
 
         # Callbacks
         early_stopping = EarlyStopping(monitor='acc', patience=6, verbose=0, mode='max')
-        rop = ReduceLROnPlateau(monitor='acc', factor=0.1, patience=6, verbose=1, epsilon=1e-4, mode='max')
+        rop = ReduceLROnPlateau(monitor='acc', factor=0.1, patience=3, verbose=1, epsilon=1e-4, mode='max')
         callbacks = [early_stopping, rop]
 
         logging.info("Fit Keras model")
