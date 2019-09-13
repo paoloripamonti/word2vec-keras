@@ -188,16 +188,20 @@ class Word2VecKeras(object):
         """
         result = {}
         results = []
+        # Prepare test
+        x_test = [gensim.utils.simple_preprocess(text) for text in x_test]
+        x_test = keras.preprocessing.sequence.pad_sequences(
+            self.tokenizer.texts_to_sequences(x_test),
+            maxlen=self.k_max_sequence_len)
+
         # Predict
-        for text in tqdm(x_test):
-            results.append(self.predict(text, threshold=0.0))
+        confidences = self.k_model.predict(x_test, verbose=1)
 
         y_pred_1d = []
-        y_pred_scores = []
 
-        for i in range(0, len(results)):
-            y_pred_scores.append(results[i]["confidence"])
-            y_pred_1d.append(results[i]["label"])
+        for confidence in confidences:
+            idx = np.argmax(confidence)
+            y_pred_1d.append(self.label_encoder.classes_[idx])
 
         y_pred_bin = []
         for i in range(0, len(results)):
